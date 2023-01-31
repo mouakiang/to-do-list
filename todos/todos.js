@@ -39,12 +39,16 @@ async function displayTodos() {
     // for each todo, render a new todo DOM element using your render function
     for (let todo of todos) {
         const render = renderTodo(todo);
+        // then add an event listener to each todo
+        // on click, update the todo in supabase
+        render.addEventListener('click', async () => {
+            await completeTodo(todo.id);
+            // then (shockingly!) call displayTodos() to refresh the list
+            displayTodos();
+        });
+        // append the rendered todo DOM element to the todosEl
         todosEl.append(render);
     }
-    // then add an event listener to each todo
-    // on click, update the todo in supabase
-    // then (shockingly!) call displayTodos() to refresh the list
-    // append the rendered todo DOM element to the todosEl
 }
 
 window.addEventListener('load', async () => {
