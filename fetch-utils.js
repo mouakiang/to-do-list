@@ -24,6 +24,8 @@ export async function deleteAllTodos() {
 
 export async function getTodos() {
     // get all todos for this user from supabase
+    const { data, error } = await client.from('todos').select('*');
+    return data;
     // once you have a response from supabase, comment this back in:
     // return checkError(response);
 }

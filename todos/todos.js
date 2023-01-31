@@ -16,6 +16,7 @@ const logoutButton = document.querySelector('#logout');
 const deleteButton = document.querySelector('.delete-button');
 
 // let some todo state (an array)
+let todos = [];
 
 todoForm.addEventListener('submit', async (e) => {
     // on submit,
@@ -31,9 +32,15 @@ todoForm.addEventListener('submit', async (e) => {
 
 async function displayTodos() {
     // clear the container (.textContent = '')
+    todosEl.textContent = '';
     // fetch the user's todos from supabase
+    todos = await getTodos();
     // loop through the user's todos
     // for each todo, render a new todo DOM element using your render function
+    for (let todo of todos) {
+        const render = renderTodo(todo);
+        todosEl.append(render);
+    }
     // then add an event listener to each todo
     // on click, update the todo in supabase
     // then (shockingly!) call displayTodos() to refresh the list
@@ -41,6 +48,7 @@ async function displayTodos() {
 }
 
 window.addEventListener('load', async () => {
+    await displayTodos();
     // fetch the todos and store in state
     // call displayTodos
 });
