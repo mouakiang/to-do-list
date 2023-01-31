@@ -28,6 +28,7 @@ todoForm.addEventListener('submit', async (e) => {
     await createTodo(newData);
     // reset the form DOM element
     // and display the todos
+    displayTodos();
 });
 
 async function displayTodos() {
